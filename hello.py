@@ -164,49 +164,24 @@ def hello(name=None):
 
 
 #7
-	medals_summer_men = []
-	medals_winter_men = []
-	medals_summer_women = []
-	medals_winter_women = []
+	year= []
+	medals_men = []
+	medals_women = []
+
+	for row in c.execute("Select t1.yearmen, t1.Medals_men, t2.Medals_female from (Select distinct games.year as yearmen, count(medal) as Medals_men from unique_medals left join categories on categories.id= unique_medals.category_id left join games on games.id = categories.games_id left join countries on countries.id = games.countries_id left join athletes on unique_medals.athlete_id= athletes.id where athletes.gender='Men' group by games.year) t1  left join (Select distinct games.year as yearwomen, count(medal) as Medals_female from unique_medals left join categories on categories.id= unique_medals.category_id left join games on games.id = categories.games_id left join countries on countries.id = games.countries_id left join athletes on unique_medals.athlete_id= athletes.id where athletes.gender='Women' group by games.year) t2 on t1.yearmen = t2.yearwomen  order by yearmen;"):
+		year.append(row[0])
+		medals_men.append(row[1])
+		medals_women.append(row[2])
 
 
 
-	for row in c.execute("Select distinct country_code, count(medal), unique_medals.gender, type from unique_medals left join athletes on athletes.id= unique_medals.athlete_id left join Categories on categories.ID = unique_medals.category_id left join games on games.ID = categories.games_id where country_code= 'FRA' group by unique_medals.gender, type order by count(medal)desc;"):
-		
-		if row[2] == "Men" and row[3]=='summer':
-			medals_summer_men.append(float(row[1]))
+	line_chart = pygal.Bar()
+	line_chart.title = "Medals won per gender over time"
+	line_chart.x_labels = year
+	line_chart.add('Men', medals_men)
+	line_chart.add('Women', medals_women)
 
-		elif row[2] == "Men" and row[3]=='winter':
-			medals_winter_men.append(float(row[1]))
-		elif row[2] == "Women" and row[3]=='summer':
-			medals_summer_women.append(float(row[1]))
-		else:
-			medals_winter_women.append(float(row[1]))
-
-
-	total_summer = sum(medals_summer_women+medals_summer_men)
-	total_winter = sum(medals_winter_women+ medals_winter_men)
-
-
-	gauge = pygal.SolidGauge(inner_radius=0.70)
-	percent_formatter = lambda x: '{:.10g}%'.format(x)
-	dollar_formatter = lambda x: '{:.10g}$'.format(x)
-	gauge.value_formatter = percent_formatter
-
-	men_win_summer = round(((medals_summer_men[0]/total_summer)*100))
-	women_win_summer = round(((medals_summer_women[0]/total_summer)*100))
-
-	men_win_winter = round(((medals_winter_men[0]/total_winter)*100))
-	women_win_winter = round(((medals_winter_women[0]/total_winter)*100))
-
-	gauge.add('Women summer', [{'value': women_win_summer, 'max_value': 100}])
-	gauge.add('Men summer', [{'value': men_win_summer, 'max_value': 100}])
-	gauge.title = "Gender split in France"
-
-	gauge.add('Women winter', [{'value': women_win_winter, 'max_value': 100}])
-	gauge.add('Men winter', [{'value': men_win_winter, 'max_value': 100}])
-
-	gauge.render_to_file("static/france_winter_summer44.svg")
+	line_chart.render_to_file('static/year_gender.svg')  
 
 
 
@@ -432,7 +407,7 @@ def hello(name=None):
 	med = []
 	mov = []
 
-	for row in c.execute("select t1.country_code, t1.Medals_2012, t2.Movies_2012 from (Select distinct country_Code, count(medal) as Medals_2012 from unique_medals left join categories on categories.id= unique_medals.category_id left join games on games.id = categories.games_id left join countries on countries.id = games.countries_id left join athletes on unique_medals.athlete_id= athletes.id where year = 2012 group by country_Code) t1 Inner join (Select distinct Code, count(movies.id) as Movies_2012 from movies left join countries on countries.country=movies.country where title_year = 2012 group by code ) t2 on t1.country_Code = t2.code order by medals_2012 desc LIMIT 10 ;"):
+	for row in c.execute("select t1.country_code, t1.Medals_2012, t2.Movies_2012 from (Select distinct country_Code, count(medal) as Medals_2012 from unique_medals left join categories on categories.id= unique_medals.category_id left join games on games.id = categories.games_id left join countries on countries.id = games.countries_id left join athletes on unique_medals.athlete_id= athletes.id where games.year = 2012 group by country_Code) t1 Inner join (Select distinct Code, count(movies.id) as Movies_2012 from movies left join countries on countries.country=movies.country where title_year = 2012 group by code ) t2 on t1.country_Code = t2.code order by medals_2012 desc LIMIT 10 ;"):
 		country.append(row[0])
 		med.append(row[1])
 		mov.append(row[2])

@@ -2,83 +2,183 @@
 <head>
 	<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/style.css') }}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
+	
 	
 </head>
 
-	<title>Hello from Flask</title>
+	<title>FrauenLoop SQL Cycle</title>
 	
 
 <div class="container">
 	<h1 class="text-center">FrauenLoop, SQL cycle - Final Project</h1>
-	<p> Fieri, inquam, Triari, nullo pacto potest, ut non dicas, quid non probes eius, a quo dissentias. quid enim me prohiberet Epicureum esse, si probarem, quae ille diceret? cum praesertim illa perdiscere ludus esset. Quam ob rem dissentientium inter se reprehensiones non sunt vituperandae, maledicta, contumeliae, tum iracundiae, contentiones concertationesque in disputando pertinaces indignae philosophia mihi videri solent.</p>
+	<p> As part of FrauenLoop SQL Cycle we have been challenged to put into practice our database management skills choosing 2 Kaggle datasets and present insights through graphs. The analysis below is based on the <a href="https://www.kaggle.com/deepmatrix/imdb-5000-movie-dataset" target="_blank"> IMDB 5000 Movie Dataset </a>
+and the <a href="https://www.kaggle.com/the-guardian/olympic-games" target="_blank">Olympics Sports and Medals from 1896 to 2014 </a> . I have used Python programming language and Pygal for data visualization, SQLite as a database engine.  
+</p>
 	<div id="left" class="col-md-6"> 
 	<h2 class="text-center">Movies Dataset</h2>
 		
-		<div id="chart" >
+		<div class="chart" style="padding-bottom:100px">
 			<embed type="image/svg+xml" src= "static/budgetvsrevenue1.svg" />
-		</div>
+			   <a class="lien" role="button" data-toggle="collapse" href="#collapse1" aria-expanded="false" aria-controls="collapseExample">See SQL Query</a>
+				<div class="collapse" id="collapse1">
+  					<div class="well">Select movie_title, gross, budget,(gross-budget) as profit <br> from movies <br>where gross!='' and budget!='' <br>order by profit desc <br>limit 10;
+  					</div>
+  				</div>
 		<p>Fieri, inquam, Triari, nullo pacto potest, ut non dicas, quid non probes eius, a quo dissentias. quid enim me prohiberet Epicureum esse, si probarem, quae ille diceret?</p>
+		</div>
 
-		<div id="chart">
-			<embed type="image/svg+xml" src= "static/colorORblack7.svg" />
-		</div>
+	
+		<div class="chart" style="padding-bottom:100px">
+			<embed type="image/svg+xml" src= "static/genreset.svg"/>
+			<a class="lien" role="button" data-toggle="collapse" href="#collapse2" aria-expanded="false" aria-controls="collapseExample">See SQL Query</a>
+				<div class="collapse" id="collapse2">
+  					<div class="well">Select distinct movies_2.genres, sum(movies.gross)as mm <br> from movies_2 left join movies on movies.id = movies_2.id <br>group by movies_2.genres <br>order by mm desc <br>limit 10;
+  					</div>
+  				</div>
 		<p>Fieri, inquam, Triari, nullo pacto potest, ut non dicas, quid non probes eius, a quo dissentias. quid enim me prohiberet Epicureum esse, si probarem, quae ille diceret?</p>
-		<div id="chart">
-			<embed type="image/svg+xml" src= "static/facebook_duration5.svg" />
 		</div>
-		<p>Fieri, inquam, Triari, nullo pacto potest, ut non dicas, quid non probes eius, a quo dissentias. quid enim me prohiberet Epicureum esse, si probarem, quae ille diceret?</p>
-		<div id="chart">
+
+		<div class="chart" style="padding-bottom:100px">
 			<embed type="image/svg+xml" src= "static/top10actors1.svg" />
-		</div>
+			<a class="lien" role="button" data-toggle="collapse" href="#collapse3" aria-expanded="false" aria-controls="collapseExample">See SQL Query</a>
+				<div class="collapse" id="collapse3">
+  					<div class="well">Select distinct actor_name, sum(gross) <br>from actors left join movies on actors.movie_id=movies.id <br>group by actor_name <br>order by sum(gross) desc <br>limit 10 ;
+  					</div>
+  				</div>
 		<p>Fieri, inquam, Triari, nullo pacto potest, ut non dicas, quid non probes eius, a quo dissentias. quid enim me prohiberet Epicureum esse, si probarem, quae ille diceret?</p>
+		</div>
 
-		<div id="chart">
-			<embed type="image/svg+xml" src= "static/geandre2.svg"/>
-		</div>
+		<div class="chart" style="padding-bottom:100px">
+			<embed type="image/svg+xml" src= "static/colorORblack7.svg" />
+			<a class="lien" role="button" data-toggle="collapse" href="#collapse4" aria-expanded="false" aria-controls="collapseExample">See SQL Query</a>
+				<div class="collapse" id="collapse4">
+  					<div class="well">Select colorvsScoreBlack.year, colorvsScoreBlack.color, colorvsScoreBlack.Score_b, colorvsScoreColor.Color, colorvsScoreColor.Score_c <br>from colorvsScoreBlack <br>left join colorvsScoreColor on colorvsScoreBlack.Year=colorvsScoreColor.Year <br>where colorvsScoreColor.Color is not null <br>order by colorvsscoreblack.year desc <br>limit 20;"
+  					</div>
+  				</div>
 		<p>Fieri, inquam, Triari, nullo pacto potest, ut non dicas, quid non probes eius, a quo dissentias. quid enim me prohiberet Epicureum esse, si probarem, quae ille diceret?</p>
+		</div>
+	
+		<div class="chart" style="padding-bottom:100px">
+			<embed type="image/svg+xml" src= "static/facebook_duration5.svg" />
+			<a class="lien" role="button" data-toggle="collapse" href="#collapse5" aria-expanded="false" aria-controls="collapseExample">See SQL Query</a>
+				<div class="collapse" id="collapse5">
+  					<div class="well">Select duration, movie_facebook_likes <br>from movies <br>where duration !="";
+  					</div>
+  				</div>
+		<p>Fieri, inquam, Triari, nullo pacto potest, ut non dicas, quid non probes eius, a quo dissentias. quid enim me prohiberet Epicureum esse, si probarem, quae ille diceret?</p>
+		</div>
 		
-		<div id="chart">
-			<embed type="image/svg+xml" src= "static/genresVSimdbscore1.svg" />
-		</div>
+		
+		
+		<div class="chart" style="padding-bottom:100px">
+			<embed type="image/svg+xml" src= "static/ggim.svg" />
+			<a class="lien" role="button" data-toggle="collapse" href="#collapse6" aria-expanded="false" aria-controls="collapseExample">See SQL Query</a>
+				<div class="collapse" id="collapse6">
+  					<div class="well">Select distinct movies_2.genres, avg(movies.imdb_score) <br>from movies_2 <br>left join movies on movies.id = movies_2.id <br>group by movies_2.genres <br>order by avg(movies.imdb_score) desc <br>limit 10;
+  					</div>
+  				</div>
 		<p>Fieri, inquam, Triari, nullo pacto potest, ut non dicas, quid non probes eius, a quo dissentias. quid enim me prohiberet Epicureum esse, si probarem, quae ille diceret?</p>
+		</div>
+		
 
 
 	</div>
 	<div id="right" class="col-md-6">
 	<h2 class="text-center">Olympics Games Dataset</h2>
+
+		<div class="chart" style="padding-bottom:100px">
+		<embed type="image/svg+xml" src= "static/radaron.svg" />
+		<a class="lien" role="button" data-toggle="collapse" href="#collapse7" aria-expanded="false" aria-controls="collapseExample">See SQL Query</a>
+				<div class="collapse" id="collapse7">
+  					<div class="well">select t1.country_code, t1.Medals_men, t2.Medals_women <br>from (Select distinct country_code, count(medal) as Medals_men from unique_medals left join athletes on athletes.id= unique_medals.athlete_id where  athletes.gender = 'Men' group by country_Code order by medals_men desc) t1 <br>left join (Select distinct country_code, count(medal) as Medals_women from unique_medals left join athletes on athletes.id= unique_medals.athlete_id  where athletes.gender = 'Women' group by country_Code order by medals_women desc) <br>t2 on t1.country_code = t2.country_code <br>limit 30;
+  					</div>
+  				</div>
+		<p>Fieri, inquam, Triari, nullo pacto potest, ut non dicas, quid non probes eius, a quo dissentias. quid enim me prohiberet Epicureum esse, si probarem, quae ille diceret?</p>
+		</div>
 		
-		<div id="chart">
+		<div class="chart" style="padding-bottom:100px">
 			<embed type="image/svg+xml" src= "static/world_winter_summer999.svg" />
-		</div>
+			<a class="lien" role="button" data-toggle="collapse" href="#collapse8" aria-expanded="false" aria-controls="collapseExample">See SQL Query</a>
+				<div class="collapse" id="collapse8">
+  					<div class="well">Select distinct count(medal), unique_medals.gender, type <br>from unique_medals <br>left join athletes on athletes.id= unique_medals.athlete_id <br>left join Categories on categories.ID = unique_medals.category_id <br>left join games on games.ID = categories.games_id <br>where country_code!= '' <br>group by unique_medals.Gender, type <br>order by count(medal)desc;
+  					</div>
+  				</div>
 		<p>Fieri, inquam, Triari, nullo pacto potest, ut non dicas, quid non probes eius, a quo dissentias. quid enim me prohiberet Epicureum esse, si probarem, quae ille diceret?</p>
-		<div id="chart">
+		</div>
+		
+		<div class="chart" style="padding-bottom:100px">
 			<embed type="image/svg+xml" src= "static/year_gender.svg" />
-		</div>
+			<a class="lien" role="button" data-toggle="collapse" href="#collapse9" aria-expanded="false" aria-controls="collapseExample">See SQL Query</a>
+				<div class="collapse" id="collapse9">
+  					<div class="well">Select t1.yearmen, t1.Medals_men, t2.Medals_female <br>from (Select distinct games.year as yearmen, count(medal) as Medals_men from unique_medals left join categories on categories.id= unique_medals.category_id left join games on games.id = categories.games_id left join countries on countries.id = games.countries_id left join athletes on unique_medals.athlete_id= athletes.id where athletes.gender='Men' group by games.year) t1  <br>left join (Select distinct games.year as yearwomen, count(medal) as Medals_female from unique_medals left join categories on categories.id= unique_medals.category_id left join games on games.id = categories.games_id left join countries on countries.id = games.countries_id left join athletes on unique_medals.athlete_id= athletes.id where athletes.gender='Women' group by games.year) t2 on t1.yearmen = t2.yearwomen  <br>order by yearmen;
+  					</div>
+  				</div>
 		<p>Fieri, inquam, Triari, nullo pacto potest, ut non dicas, quid non probes eius, a quo dissentias. quid enim me prohiberet Epicureum esse, si probarem, quae ille diceret?</p>
-		<div id="chart">
+		</div>
+		
+		<div class="chart" style="padding-bottom:100px">
 			<embed type="image/svg+xml" src= "static/recordbysport.svg" />
-		</div>
+			<a class="lien" role="button" data-toggle="collapse" href="#collapse10" aria-expanded="false" aria-controls="collapseExample">See SQL Query</a>
+				<div class="collapse" id="collapse10">
+  					<div class="well">Select athelete_ID, category_id, medals,sport,country_code, athlete <br>from (Select athelete_ID, medals,sport,athlete,Country_code, category_id, max(medals) as maximum <br>from  (Select athelete_ID,count(medal) as medals, category_id, Sport, athletes.athlete,Country_code from reward left join athletes on reward.Athelete_id=athletes.id group by athelete_ID, sport) group by sport) <br>where medals = maximum <br>order by medals desc <br>limit 10 ;"
+  					</div>
+  				</div>
 		<p>Fieri, inquam, Triari, nullo pacto potest, ut non dicas, quid non probes eius, a quo dissentias. quid enim me prohiberet Epicureum esse, si probarem, quae ille diceret?</p>
-		<div id="chart">
+		</div>
+		
+		<div class="chart" style="padding-bottom:100px">
 			<embed type="image/svg+xml" src= "static/world_best22.svg" />
-		</div>
+			<a class="lien" role="button" data-toggle="collapse" href="#collapse11" aria-expanded="false" aria-controls="collapseExample">See SQL Query</a>
+				<div class="collapse" id="collapse11">
+  					<div class="well">Select medals,sport,country,alpha_2 <br>from (Select  medals,sport,alpha_2,country, max(medals) as maximum  <br>from  (Select count(medal) as medals,unique_medals.Sport, athletes.alpha_2, countries.country from unique_medals left join athletes on unique_medals.Athlete_id=athletes.id left join countries on countries.Code = athletes.Country_code group by alpha_2, sport) group by alpha_2) <br>where medals = maximum and alpha_2 !=''  and country!='' ;
+  					</div>
+  				</div>
 		<p>Fieri, inquam, Triari, nullo pacto potest, ut non dicas, quid non probes eius, a quo dissentias. quid enim me prohiberet Epicureum esse, si probarem, quae ille diceret?</p>
-		<div id="chart">
-		<embed type="image/svg+xml" src= "static/radar11.svg" />
 		</div>
-		<p>Fieri, inquam, Triari, nullo pacto potest, ut non dicas, quid non probes eius, a quo dissentias. quid enim me prohiberet Epicureum esse, si probarem, quae ille diceret?</p>
-		<div id="chart">
+		
+	
+		
+		<div class="chart" style="padding-bottom:100px">
 		<embed type="image/svg+xml" src= "static/home_aborad.svg" />
-		</div>
+		<a class="lien" role="button" data-toggle="collapse" href="#collapse12" aria-expanded="false" aria-controls="collapseExample">See SQL Query</a>
+				<div class="collapse" id="collapse12">
+  					<div class="well">Select t1.country_code, (t2.Medals_abroad/t3.games_abroad) as avg_medals_abroad,(t1.medals_all-t2.medals_abroad)/t4.games_home as avg_medals_home <br>from(Select distinct country_code, count(medal) as Medals_all from unique_medals left join athletes on athletes.id= unique_medals.athlete_id  left join categories on categories.id= unique_medals.category_id left join games on games.ID=categories.games_id left join countries on countries.id = games.countries_id group by country_Code) t1 
+<br>left join (Select distinct country_code, count(medal) as Medals_abroad from unique_medals left join athletes on athletes.id= unique_medals.athlete_id left join categories on categories.id= unique_medals.category_id left join games on games.ID=categories.games_id left join countries on countries.id = games.countries_id where athletes.Country_code != countries.Code  group by country_Code) t2
+on t1.country_code = t2.country_code
+<br>left join(Select distinct Country_code, count(distinct games_ID )as Games_abroad from sumandwin left join countries on countries.country = sumandwin.country where code!=country_code group by country_code ) t3
+on t2.country_code = t3.country_code
+<br>left join(Select distinct Country_code, count(distinct games_ID)as Games_home from sumandwin left join countries on countries.country = sumandwin.country where code=country_code group by country_code) t4
+on t3.country_code = t4.country_code <br>where avg_medals_home is not null
+<br>limit 30;
+  					</div>
+  				</div>
 		<p>Fieri, inquam, Triari, nullo pacto potest, ut non dicas, quid non probes eius, a quo dissentias. quid enim me prohiberet Epicureum esse, si probarem, quae ille diceret?</p>
+		</div>
+		
 	</div>
 
-	<div id="bottom">
+	<div id="bottom" class= "col-md-6 offset-md-3" style="margin-left:300px; margin-right:200px">
 		<h2 class="text-center">Combined Datasets </h2>
-		<div id="chart" class="col-md-6 text-center">
+		<div class="chart" style="padding-bottom:100px">
 		<embed type="image/svg+xml" src= "static/00and90.svg" />
+		<a class="lien" role="button" data-toggle="collapse" href="#collapse13" aria-expanded="false" aria-controls="collapseExample">See SQL Query</a>
+				<div class="collapse" id="collapse13">
+  					<div class="well">
+Select  t1.country_code, t1.Medals, t2.Mo, t3.country_code, t3.medals,t4.movies <br>from
+(Select distinct country_Code , count(medal) as Medals from unique_medals left join categories on categories.id= unique_medals.category_id left join games on games.id = categories.games_id left join countries on countries.id = games.countries_id left join athletes on unique_medals.athlete_id= athletes.id where games.year between 1990 and 1999 group by country_code) t1 
+<br>left join (Select distinct code, count(movies.id) as Mo from movies left join countries on countries.country=movies.country where title_year between 1990 and 1999 group by code) t2
+on t1.country_code = t2.code 
+<br>left join
+(Select distinct country_Code , count(medal) as Medals from unique_medals left join categories on categories.id= unique_medals.category_id left join games on games.id = categories.games_id left join countries on countries.id = games.countries_id left join athletes on unique_medals.athlete_id= athletes.id where games.year between 2000 and 2009 group by athletes.country_code) t3 
+on t2.code = t3.country_code
+<br>left join (Select distinct code, count(movies.id) as Movies from movies left join countries on countries.country=movies.country where title_year between 2000 and 2009 group by code) t4
+on t3.country_code = t4.code <br>where mo is not null and movies is not null;
+  					</div>
+  				</div>
+		<p>Fieri, inquam, Triari, nullo pacto potest, ut non dicas, quid non probes eius, a quo dissentias. quid enim me prohiberet Epicureum esse, si probarem, quae ille diceret?</p>
 		</div>
-	
-</div>	
+	</div>
+</div>
+<script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>	
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 </html>

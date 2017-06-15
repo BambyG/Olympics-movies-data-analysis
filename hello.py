@@ -237,7 +237,7 @@ def hello(name=None):
 	athlete = []
 	country = []
 
-	for row in c.execute("select athelete_ID, category_id, medals,sport,country_code, athlete from (Select athelete_ID, medals,sport,athlete,Country_code, category_id, max(medals) as maximum from  (Select athelete_ID,count(medal) as medals, category_id, Sport, athletes.athlete,Country_code from reward left join athletes on reward.Athelete_id=athletes.id group by athelete_ID, sport) group by sport) where medals = maximum order by medals desc limit 10 ;"):
+	for row in c.execute("Select athlete_id, category_id, medals,sport,cc, athlete from (Select athlete_id, medals,sport,athlete,cc, category_id, max(medals) as maximum from (Select athlete_id,count(medal) as medals, category_id, Sport, athletes.athlete,sumandwin.Country_code as cc from sumandwin left join athletes on sumandwin.athlete_id=athletes.id group by athletes.id, sport) group by sport) where medals = maximum order by medals desc limit 10 ;"):
 		medals.append(float(row[2]))
 		sport.append(row[3])
 		athlete.append(row[5])
@@ -247,13 +247,13 @@ def hello(name=None):
 	bol=list(zip(sport,medals,athlete,country))
 
 	record = pygal.HorizontalBar()
-	record.title = 'Top 10 Athletes by Sport '
+	record.title = 'Top 10 Athletes by Sport'
 
 	for r in bol:
 		record.add(r[0], [{'value': r[1], 'label': r[2]}])
 
 
-	record.render_to_file('static/recordbysport.svg')
+	record.render_to_file('static/recordbyplayers.svg')
 
 #10
 
@@ -385,7 +385,7 @@ def hello(name=None):
 	avg_abroad = []
 	avg_home = []
 
-	for row in c.execute("Select t1.country_code, (t2.Medals_abroad/t3.games_abroad) as avg_medals_abroad,(t1.medals_all-t2.medals_abroad)/t4.games_home as avg_medals_home from(Select distinct country_code, count(medal) as Medals_all from unique_medals left join athletes on athletes.id= unique_medals.athlete_id  left join categories on categories.id= unique_medals.category_id left join games on games.ID=categories.games_id left join countries on countries.id = games.countries_id group by country_Code) t1 left join (Select distinct country_code, count(medal) as Medals_abroad from unique_medals left join athletes on athletes.id= unique_medals.athlete_id left join categories on categories.id= unique_medals.category_id left join games on games.ID=categories.games_id left join countries on countries.id = games.countries_id where athletes.Country_code != countries.Code  group by country_Code) t2 on t1.country_code = t2.country_code left join(Select distinct Country_code, count(distinct games_ID )as Games_abroad from sumandwin left join countries on countries.country = sumandwin.country where code!=country_code group by country_code ) t3 on t2.country_code = t3.country_code left join(Select distinct Country_code, count(distinct games_ID)as Games_home from sumandwin left join countries on countries.country = sumandwin.country where code=country_code group by country_code) t4 on t3.country_code = t4.country_code where avg_medals_home is not null;"):
+	for row in c.execute("Select t1.country_code, (t2.Medals_abroad/t3.games_abroad) as avg_medals_abroad,(t1.medals_all-t2.medals_abroad)/t4.games_home as avg_medals_home from(Select distinct country_code, count(medal) as Medals_all from unique_medals left join athletes on athletes.id= unique_medals.athlete_id  left join categories on categories.id= unique_medals.category_id left join games on games.ID=categories.games_id left join countries on countries.id = games.countries_id group by country_Code) t1 left join (Select distinct country_code, count(medal) as Medals_abroad from unique_medals left join athletes on athletes.id= unique_medals.athlete_id left join categories on categories.id= unique_medals.category_id left join games on games.ID=categories.games_id left join countries on countries.id = games.countries_id where athletes.Country_code != countries.Code  group by country_Code) t2 on t1.country_code = t2.country_code left join(Select distinct Country_code, count(distinct games_ID )as Games_abroad from sumandwin left join countries on countries.country = sumandwin.country where code!=country_code group by country_code ) t3 on t2.country_code = t3.country_code left join(Select distinct Country_code, count(distinct games_ID)as Games_home from sumandwin left join countries on countries.country = sumandwin.country where code=country_code group by country_code) t4 on t3.country_code = t4.country_code where avg_medals_home is not null order by avg_medals_home desc limit 17;"):
 	    Country.append(row[0])
 	    avg_abroad.append(row[1])
 	    avg_home.append(row[2])
@@ -399,7 +399,7 @@ def hello(name=None):
 	line_chart.add('Home Games', avg_home)
 
 
-	line_chart.render_to_file('static/home_aborad.svg')  
+	line_chart.render_to_file('static/home_abo.svg')  
 
 #12
 

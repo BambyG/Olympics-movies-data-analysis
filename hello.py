@@ -39,14 +39,14 @@ def hello(name=None):
 
 		
 	box= pygal.Bar(x_label_rotation=30)
-	box.title = ' Top 10 most profitable movies'
+	box.title = ' What are the most profitable movies?'
 	box.x_labels = movie_title
 	box.add('Revenue', revenue)
 	box.add('Budget', budget)
 	box.add('Profit', profit)
 
 	box.value_formatter = lambda y: "${:,}".format(y)
-	box.render_to_file('static/budgetvsrevenue1.svg')
+	box.render_to_file('static/profitability.svg')
 
 
 
@@ -63,7 +63,7 @@ def hello(name=None):
 	lines.add('Color',score_c) 
 	lines.add('Black and White',score_b)
 
-	lines.render_to_file('static/colorORblack7.svg', format="svg")
+	lines.render_to_file('static/colorandscoreimpact.svg', format="svg")
 
 #third graph
 
@@ -80,9 +80,9 @@ def hello(name=None):
 
 
 	xy_chart = pygal.XY(stroke=False,x_title='Duration in minutes', y_title='Facebook Likes')
-	xy_chart.title = 'Duration vs Facebook Likes'
+	xy_chart.title = 'What the impact of the Imdb score on the movie facebook likes?'
 	xy_chart.add('Movies', both)
-	xy_chart.render_to_file('static/facebook_duration5.svg', format="svg")
+	xy_chart.render_to_file('static/facebookanddur.svg', format="svg")
 
 
 #fourth graph
@@ -99,14 +99,14 @@ def hello(name=None):
 	deux = list (zip(actor_name,revenue))
 		
 	line = pygal.HorizontalBar(x_label_rotation=30)
-	line.title = 'Top 10 actors playing in movies with the higest revenue'
+	line.title = 'What are the actors playing in movies with the higest revenue?'
 
 	for r in deux:
 		line.add(r[0], r[1])
 
 	line.value_formatter = lambda y: "${:,}".format(y)
 
-	line.render_to_file('static/top10actors1.svg')
+	line.render_to_file('static/actorsandrevenuefrommovies.svg')
 
 
 #5 graph
@@ -125,7 +125,7 @@ def hello(name=None):
 	total_revenue = sum(revenue)
 
 	pie_chart = pygal.Pie()
-	pie_chart.title = 'Genres by Revenue'
+	pie_chart.title = 'What are the genres generating the highest revenues?'
 
 	for r in both: 
 		pie_chart.add(r[0], [{'value': round(((r[1]/total_revenue)*100)), 'label': str(r[1])}])
@@ -134,7 +134,7 @@ def hello(name=None):
 
 
 	
-	pie_chart.render_to_file('static/genreset.svg')
+	pie_chart.render_to_file('static/genresandrevenuefrommovie.svg')
 
 
 
@@ -151,13 +151,13 @@ def hello(name=None):
 	bol=list(zip(gen,im))
 
 	pibb = pygal.HorizontalBar()
-	pibb.title = 'Genres by Imdb Score'
+	pibb.title = 'What are the genres generating the highest imdb score?'
 
 	for r in bol:
 		pibb.add(r[0], [{'value': r[1], 'label': r[0]}])
 
 
-	pibb.render_to_file('static/ggim.svg')
+	pibb.render_to_file('static/genresandscorefrommovie.svg')
 
 
 
@@ -174,13 +174,13 @@ def hello(name=None):
 		medals_women.append(row[2])
 
 
-	line_chart = pygal.Bar()
-	line_chart.title = "Medals won per gender over time"
+	line_chart = pygal.Bar(x_label_rotation=30)
+	line_chart.title = "How did the victory by gender evolve with time? "
 	line_chart.x_labels = year
 	line_chart.add('Men', medals_men)
 	line_chart.add('Women', medals_women)
 
-	line_chart.render_to_file('static/year_gender.svg')  
+	line_chart.render_to_file('static/yearandgenrechange.svg')  
 
 
 
@@ -223,12 +223,12 @@ def hello(name=None):
 
 	gauge.add('Women summer', [{'value': women_win_summer, 'max_value': 100}])
 	gauge.add('Men summer', [{'value': men_win_summer, 'max_value': 100}])
-	gauge.title = "Gender split in the World"
+	gauge.title = "What is the Gender split by type of game?"
 
 	gauge.add('Women winter', [{'value': women_win_winter, 'max_value': 100}])
 	gauge.add('Men winter', [{'value': men_win_winter, 'max_value': 100}])
 
-	gauge.render_to_file("static/world_winter_summer999.svg")
+	gauge.render_to_file("static/worldglobalgendersplit.svg")
 
 #9
 
@@ -247,13 +247,13 @@ def hello(name=None):
 	bol=list(zip(sport,medals,athlete,country))
 
 	record = pygal.HorizontalBar()
-	record.title = 'Top 10 Athletes by Sport'
+	record.title = 'What are the best athletes by Sport?'
 
 	for r in bol:
 		record.add(r[0], [{'value': r[1], 'label': r[2]}])
 
 
-	record.render_to_file('static/recordbyplayers.svg')
+	record.render_to_file('static/bestplayyersbysport.svg')
 
 #10
 
@@ -377,7 +377,7 @@ def hello(name=None):
 		worldmap_chart.add(key,values)
 		
 
-	worldmap_chart.render_to_file('static/world_best22.svg')
+	worldmap_chart.render_to_file('static/best_country_game.svg')
 
 #11 
 
@@ -393,13 +393,13 @@ def hello(name=None):
 
 
 	line_chart = pygal.StackedBar(x_title='Countries', y_title='Average Medals')
-	line_chart.title = "Is the fact to host the Games impact a country general performance?"
+	line_chart.title = "Is the fact to host the games impacts a country general performance?"
 	line_chart.x_labels = Country
 	line_chart.add('Away Games', avg_abroad)
 	line_chart.add('Home Games', avg_home)
 
 
-	line_chart.render_to_file('static/home_abo.svg')  
+	line_chart.render_to_file('static/hostingornot.svg')  
 
 #12
 
@@ -415,12 +415,12 @@ def hello(name=None):
 
 
 	radar_chart = pygal.Radar()
-	radar_chart.title = 'Men vs Women victory split'
+	radar_chart.title = 'What is the Men and Women victory split during the games?'
 	radar_chart.x_labels = country
 	radar_chart.add('Medals Men', men)
 	radar_chart.add('Medals Women', women)
 
-	radar_chart.render_to_file('static/radaron.svg')
+	radar_chart.render_to_file('static/sexeandvictory.svg')
 #13
  
 	Country= []
@@ -438,13 +438,13 @@ def hello(name=None):
 
 
 	dot_chart = pygal.Box()
-	dot_chart.title = '90s and 00s medals and movies comparison'
+	dot_chart.title = 'How the 90s and 00s are different in terms of medals and movies?'
 	dot_chart.add('Medals in 90s',  Medals_90)
 	dot_chart.add('Movies in 90s', Movies_90)
 	dot_chart.add('Medals in 00s', Medals_00)
 	dot_chart.add('Movies in 00s', Movies_00)
 
-	dot_chart.render_to_file('static/00and90.svg')  
+	dot_chart.render_to_file('static/00contre90.svg')  
 
 
 

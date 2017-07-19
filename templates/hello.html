@@ -11,7 +11,7 @@
 
 <div class="container">
 	<h1 class="text-center">FrauenLoop, SQL cycle - Final Project</h1>
-	<p> As part of FrauenLoop SQL Cycle we have been challenged to put into practice our database management skills by choosing 2 Kaggle datasets and present insights through graphs. The analysis below is based on the  <a href="https://www.kaggle.com/deepmatrix/imdb-5000-movie-dataset" target="_blank"> IMDB 5000 Movie Dataset </a>
+	<p> As part of FrauenLoop SQL cycle we have been challenged to put into practice our database management skills by choosing 2 Kaggle datasets and presenting insights through graphs. The analysis below is based on the <a href="https://www.kaggle.com/deepmatrix/imdb-5000-movie-dataset" target="_blank"> IMDB 5000 Movie Dataset </a>
 and the <a href="https://www.kaggle.com/the-guardian/olympic-games" target="_blank">Olympics Sports and Medals from 1896 to 2014 </a> . I have used Python programming language, Pygal for data visualization and SQLite as a database engine.  
 </p>
 <br>
@@ -33,7 +33,7 @@ and the <a href="https://www.kaggle.com/the-guardian/olympic-games" target="_bla
   					<div class="well">Select movie_title, gross, budget,(gross-budget) as profit <br> from movies <br>where gross!='' and budget!='' <br>order by profit desc <br>limit 10;
   					</div>
   				</div>
-		<p>From this graph we can see for the top 10 most profitable movies that some managed to get to this position thanks to an important investment compared to other movies. <br>Indeed, movies such as Star Wars or EI had a low budget spend to generate a return on investment of about 40%. <br>Which was not the case for movies such as Avatar or The Avengers that respectively have a ROI of about 2,21% and 1,83% and Revenue between 600 and 700 millions.</p>
+		<p>From this graph we can see for the top 10 most profitable movies that some managed to get to this position due to an important investment compared to other movies. <br>In fact, movies such as “Star Wars” or “EI” had a low budget, but they generated a remarkable return on investment (ROI) of about 40%.<br>Which was not the case for movies such as “Avatar” or “The Avengers” that respectively have a ROI of about 2,21% and 1,83% and revenue between 600 and 700 millions.</p>
 		</div>
 
 
@@ -47,7 +47,7 @@ and the <a href="https://www.kaggle.com/the-guardian/olympic-games" target="_bla
   					<div class="well">Select distinct movies_2.genres, sum(movies.gross)as mm <br> from movies_2 left join movies on movies.id = movies_2.id <br>group by movies_2.genres <br>order by mm desc <br>limit 10;
   					</div>
   				</div>
-		<p>Keeping the revenue as subject, I am comparing it now to the genres. <br>What genres generate the highest revenues? <br>The answer is the Action movies representing 37% of this top 10! They are followed by Comedies with 21%.
+		<p>Keeping the revenue as a subject, I am comparing it now to the genres and investigate on the question:  <br>What genres generate the highest revenues? <br>The result is Action movies representing 37% of this top 10. They are followed by Comedies with 21%. 
 		<br>
 		<br>
 		</p>
@@ -61,7 +61,7 @@ and the <a href="https://www.kaggle.com/the-guardian/olympic-games" target="_bla
   					<div class="well">Select distinct actor_name, sum(gross) <br>from actors left join movies on actors.movie_id=movies.id <br>group by actor_name <br>order by sum(gross) desc <br>limit 10 ;
   					</div>
   				</div>
-		<p>With this graph I am showing the TOP 10 actors who played in the most expensive movies to produce.<br>Robert De Niro comes first having played in movies such as Tootsie or Cars. 
+		<p>With this graph I am showing the top 10 actors who played in the most expensive movies to produce.<br>Robert De Niro comes first having played in movies such as “Tootsie” or “Cars”. 
 		<br>
 		<br>
 		<br>
@@ -77,7 +77,7 @@ and the <a href="https://www.kaggle.com/the-guardian/olympic-games" target="_bla
   					<div class="well">Select colorvsScoreBlack.year, colorvsScoreBlack.color, colorvsScoreBlack.Score_b, colorvsScoreColor.Color, colorvsScoreColor.Score_c <br>from colorvsScoreBlack <br>left join colorvsScoreColor on colorvsScoreBlack.Year=colorvsScoreColor.Year <br>where colorvsScoreColor.Color is not null <br>order by colorvsscoreblack.year desc <br>limit 20;"
   					</div>
   				</div>
-		<p>For this graph I wanted to know if the color of a movie was impacting its IMDB score. <br>I was personally assuming that the movies in color would be better scored.  <br>I have selected the 20 last years for this analysis and according to the movies from this dataset black and white ones are generally better scored. <br>It’s in 2008 that the average scores from both type of movie where actually comparable, scored at 6.34.  During this period of time 205 movies from this dataset were in black and white and 4693 were in color. <br>We can assume that the rarity of the black and white movies actually attracts and certain type of audience, an audience that would more generous in terms of rating. </p>
+		<p>Working on this graph I wanted to know if the color of a movie had a significant impact on its IMDB score.<br>Personally, I was assuming that movies in color would be better scored. <br>I have selected the 20 last years for this analysis and according to the movies from this dataset to my surprise I found that black and white ones are generally better scored. <br>It’s in 2008 that the average scores from both type of movie where actually comparable, scored at 6.34. During this period of time 205 movies from this dataset were in black and white and 4,693 were in color.<br>We can presume that the rarity of the black and white movies actually attract a certain type of audience, an audience that would be more generous in terms of rating.</p>
 		</div>
 	
 		<div class="chart" style="padding-bottom:50px">
@@ -89,8 +89,9 @@ and the <a href="https://www.kaggle.com/the-guardian/olympic-games" target="_bla
   					</div>
   				</div>
 		<p>
-In this graph a positive linear correlation between the Facebook likes and the film duration is not affirmed. <br>However we can easily notice a concentration of movies lasting between 100 and 150 minutes and having between 0 and 40k likes.  <br>We can also see that long lasting movies don’t get very high number of likes on Facebook.
+In this graph I’m showing that a positive linear correlation between the Facebook likes and the film duration is not affirmed. <br>However we can easily notice a concentration of movies lasting between 100 and 150 minutes and having between 0 and 40,000 likes.  <br>We can also see that long lasting movies do not get very high number of likes on Facebook. 
 <br>
+<br> 
 <br> 
 </p>
 		</div>
@@ -105,7 +106,7 @@ In this graph a positive linear correlation between the Facebook likes and the f
   					<div class="well">Select distinct movies_2.genres, avg(movies.imdb_score) <br>from movies_2 <br>left join movies on movies.id = movies_2.id <br>group by movies_2.genres <br>order by avg(movies.imdb_score) desc <br>limit 10;
   					</div>
   				</div>
-		<p>The last graph for this movie dataset shows the average Imdb score by genre. <br>My question is: What is the genres that is the best scored? <br>History movies are better scored than Music movies with respectively 7.5 and 7.2 in average; against 2.9 for Game-Show. <br>The genres generating highest revenues are not the best scored. Indeed, Action movie as a genre doesn’t even appear in this top 10.</p>
+		<p>The last graph for this movie dataset shows the average IMDB score by genre.<br>My question is: What are the genres that are the best scored? <br>History movies are better scored than Music movies with respectively 7.5 and 7.2 in average; against 2.9 for Game-Shows.<br>Interestingly I found that the genres generating highest revenues are not the best scored. Indeed, Action movies as a genre are not even represented in this top 10.</p>
 		</div>
 		
 
@@ -126,7 +127,7 @@ In this graph a positive linear correlation between the Facebook likes and the f
   					<div class="well">select t1.country_code, t1.Medals_men, t2.Medals_women <br>from (Select distinct country_code, count(medal) as Medals_men from unique_medals left join athletes on athletes.id= unique_medals.athlete_id where  athletes.gender = 'Men' group by country_Code order by medals_men desc) t1 <br>left join (Select distinct country_code, count(medal) as Medals_women from unique_medals left join athletes on athletes.id= unique_medals.athlete_id  where athletes.gender = 'Women' group by country_Code order by medals_women desc) <br>t2 on t1.country_code = t2.country_code <br>limit 30;
   					</div>
   				</div>
-		<p>This first graph shows the gap of medals won per gender. I have selected the countries by taking the top 30 with the highest medals won per women. <br>When the number of medals won by men is always higher than the ones won by women, only Romania as a comparable number of medals won per gender. </p>
+		<p>This first graph shows the gap of medals won per gender. I have selected the countries by taking the top 30 with the highest medals won per women.<br>The result of my analysis is that the number of medals won by men is always higher than the medals won by women, but the only country from this top 30 is Romania that has a comparable number of medals won per gender.</p>
 		<br>
 		<br>
 		</div>
@@ -139,7 +140,7 @@ In this graph a positive linear correlation between the Facebook likes and the f
   					<div class="well">Select distinct count(medal), unique_medals.gender, type <br>from unique_medals <br>left join athletes on athletes.id= unique_medals.athlete_id <br>left join Categories on categories.ID = unique_medals.category_id <br>left join games on games.ID = categories.games_id <br>where country_code!= '' <br>group by unique_medals.Gender, type <br>order by count(medal)desc;
   					</div>
   				</div>
-		<p>With this second graph I wanted to see if the difference was different during summer games or winter games. This graph shows the victory split by gender and by type of game (summer or winter).<br>Despite the fact that men receive and have the opportunity to win more medals than women we can see that the gap is less important during winter games. </p>
+		<p>With this second graph I wanted to see if the gender gap is different between summer and winter games. This graph shows the victory split by gender and by type of game (summer or winter).<br>Despite the fact that men receive and have the opportunity to participate in more competitive games and therefore to win more medals than women, we can see that the gap is less important during winter games.</p>
 		</div>
 		
 		<div class="chart" style="padding-bottom:50px">
@@ -150,23 +151,25 @@ In this graph a positive linear correlation between the Facebook likes and the f
   					<div class="well">Select t1.yearmen, t1.Medals_men, t2.Medals_female <br>from (Select distinct games.year as yearmen, count(medal) as Medals_men from unique_medals left join categories on categories.id= unique_medals.category_id left join games on games.id = categories.games_id left join countries on countries.id = games.countries_id left join athletes on unique_medals.athlete_id= athletes.id where athletes.gender='Men' group by games.year) t1  <br>left join (Select distinct games.year as yearwomen, count(medal) as Medals_female from unique_medals left join categories on categories.id= unique_medals.category_id left join games on games.id = categories.games_id left join countries on countries.id = games.countries_id left join athletes on unique_medals.athlete_id= athletes.id where athletes.gender='Women' group by games.year) t2 on t1.yearmen = t2.yearwomen  <br>order by yearmen;
   					</div>
   				</div>
-		<p>I was talking about opportunities earlier, in fact women have less games open to them compared to men.<br>If we take a look at this third graph we can clearly see that in 1896 during the first Olympics games no women were even allowed to compete, we had to wait for the year 1900 to see the first women participating, this was in Paris. <br>It’s only games after games than sport categories were opening to women.</p>
+		<p>Women have less games open to them compared to men. <br>If we take a look at this third graph we can clearly see that in 1896 during the first Olympics games no women were even allowed to compete, we had to wait for the year 1900 to see the first women participating in Paris’ Olympic games.<br>Olympic games competition after competition there were more categories opening up and accessible to women.</p>
 		</div>
 		
 		<div class="chart" style="padding-bottom:50px">
-		<h3>Atheletes and Sport</h3>
+		<h3>Athletes and Sport</h3>
 			<embed type="image/svg+xml" src= "static/bestplayyersbysport.svg" />
 			<a class="lien" role="button" data-toggle="collapse" href="#collapse10" aria-expanded="false" aria-controls="collapseExample">See SQL Query</a>
 				<div class="collapse" id="collapse10">
   					<div class="well">Select athelete_ID, category_id, medals,sport,country_code, athlete <br>from (Select athelete_ID, medals,sport,athlete,Country_code, category_id, max(medals) as maximum <br>from  (Select athelete_ID,count(medal) as medals, category_id, Sport, athletes.athlete,Country_code from reward left join athletes on reward.Athelete_id=athletes.id group by athelete_ID, sport) group by sport) <br>where medals = maximum <br>order by medals desc <br>limit 10 ;"
   					</div>
   				</div>
-		<p>Let’s put this gender equity problem aside and have a look at this histogram. I am showing through it the best athletes per sport.  The winner is Michael Phelps in Aquatics with 22 medals followed by Larissa Latynina in Gymnastics.<br>I let you discover the entire Top 10 …</p>
+		<p>Let’s put this gender equity problem aside and have a look at this histogram. I am showing through it the best athletes per sport. The winner is Michael Phelps in Aquatics with 22 medals followed by Larissa Latynina in Gymnastics.<br>I let you discover the entire Top 10 …</p>
 		<br>
 		<br>
 		<br>
 		<br>
 		<br>
+		<br>
+		<br>		
 		</div>
 		
 		<div class="chart" style="padding-bottom:50px">
@@ -177,8 +180,7 @@ In this graph a positive linear correlation between the Facebook likes and the f
   					<div class="well">Select medals,sport,country,alpha_2 <br>from (Select  medals,sport,alpha_2,country, max(medals) as maximum  <br>from  (Select count(medal) as medals,unique_medals.Sport, athletes.alpha_2, countries.country from unique_medals left join athletes on unique_medals.Athlete_id=athletes.id left join countries on countries.Code = athletes.Country_code group by alpha_2, sport) group by alpha_2) <br>where medals = maximum and alpha_2 !=''  and country!='' ;
   					</div>
   				</div>
-		<p>In the same logic and in a bigger scale, the question I was wondering is: In which sport each country is better at? <br>Which sport had the highest medal count by country? I invite you to over on the countries you interested it or play with the legend to highlight them on the map.  <br>What I can tell you is that Chile is doing well in Tennis and Nigeria in Athletics!</p>
-		<br>
+		<p>In the same logic and in a bigger scale, I am wondering the following: In which sport category each country is better at? <br>Which sport had the highest medal count by country? I invite you to point on the countries you are interested in or play with the legend to highlight the categories on the map.<br>You can gain a lot of interesting learnings that you may not expected, for instance that Chile is doing very well in Tennis and Nigeria in Athletics!</p>
 		<br>
 		</div>
 		
@@ -199,8 +201,7 @@ on t3.country_code = t4.country_code <br>where avg_medals_home is not null
 <br>limit 30;
   					</div>
   				</div>
-		<p>My last question is: Is the fact to host a game impacts the performance of athletes? It’s known that playing a game at home is often an advantage. <br>I can confirm it with this bar chart; I calculated a average growth of 102% when countries were hosting the games. 
-Comparing the USA and China having a comparable total of medals china’s number of medals growth is more important, respectively at +209% and +64%.<br> In other words, when both countries are playing at home - China is performing better than the USA.
+		<p>My last research question is: Does the fact that the Olympic games are taking place in the athletes country have any impact on the performance of athletes? It is known that playing a game at home is often considered as an advantage. <br>I can confirm it with this bar chart; I calculated an average growth rate of 102% when countries were hosting the games. Comparing the USA with China, having a comparable total of medals, China’s total number of medals growth rate is obviously higher, in numbers respectively at +209% and +64%.<br>In other words, when both countries are hosting the Olympic games or so to say, playing at home – China’s performance is better than the USA.
 </p>
 		</div>
 		
@@ -225,7 +226,8 @@ on t2.code = t3.country_code
 on t3.country_code = t4.code <br>where mo is not null and movies is not null;
   					</div>
   				</div>
-		<p>This combined graph shows information from both datasets. <br>I am comparing here the medals and movies in the 90’s and 00’s. There are more movies overtime and much more medals, which is expected. <br>What I found interesting here is that we have an idea of the distribution.<br>Comparing the quartiles of the movies list, Q1 was at 17.25 movies by country in 90’s against 24.5 in 2000’s. <br>The growth can also be seen comparing the maximum value from both decades that increased by 48% for the movies and 310.5% for the medals.</p>
+		<p>This combined graph shows information from both datasets.<br>I am comparing here the medals and movies in the 90’s and 00’s. There are more movies overtime and much more medals, which is expected.<br>What I found interesting here is that we can get more insights on the distribution:
+Comparing the quartiles of the movies list, Q1 was at 17.25 movies by country in the 90’s against 24.5 in the 2000’s.<br>The growth rate can also be seen comparing the maximum value from both decades that increased by 48% for the movies and even 310.5% for the medals.</p>
 		</div>
 	</div>
 
@@ -235,8 +237,8 @@ on t3.country_code = t4.code <br>where mo is not null and movies is not null;
 <div class="container">
 <h3>To conclude ...</h3>
 <p>
-While analyzing the movie dataset, some aspects of movies have been highlighted. We have seen the impact of the color, duration, genres on the revenue or on the Imdb Score. 
-<br>The Olympics games dataset analysis highlighted a gender equity issue along with the strength of each country regarding the sports and how certain countries are more performing than others when they are hosting the games. 
+While analyzing the movie dataset, some interesting aspects of movie correlations have been highlighted. We have seen the impact of the color, duration, genres on the revenue or on the IMDB Score. 
+<br>The Olympics games dataset analysis highlighted a gender equity issue along with the strength of each country regarding the sports and how certain countries are better performing than others when they are hosting the games
 <br>
 <br>Thanks for reading, 
 <br>
@@ -244,7 +246,7 @@ While analyzing the movie dataset, some aspects of movies have been highlighted.
 </p>
 
 <br>
-<p style="font-size:11px;">Note: More than 35000 medals have been won since the beginning of the games. The Olympics Games dataset has a row per athlete, when a team wins a medal this dataset will count 4 medals (rows) for the 4x100 meter relay gold medal winner.<br>To have figures closed to what we find online I created a unique medals table grouping my initial table by medal, category_id, event, country_code and gender. </p>
+<p style="font-size:11px;">Note: More than 35000 medals have been won since the beginning of the games. The Olympics Games dataset has a row per athlete, when a team wins a medal this dataset will count 4 medals (rows) for the 4x100 meter relay gold medal winner.<br>To have figures closed to what we find online I created a unique medals table grouping my initial table by medal, category_id, event, country_code and gender.</p>
 </div>
 <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>	
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>

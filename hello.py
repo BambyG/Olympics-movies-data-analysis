@@ -8,7 +8,7 @@ from pygal.style import Style
 import sqlite3
 from pygal.maps.world import World
 from pygal.style import Style
-
+import os
 
 
 
@@ -19,8 +19,8 @@ app = Flask(__name__, static_url_path='/static')
 
 @app.route('/')
 def hello(name=None):
-	conn = sqlite3.connect('/Users/ograndberry/Documents/FrauenLoop/SQL/databases/Project_frauenloop2017')
-
+	conn = sqlite3.connect(os.path.join(os.path.dirname(__file__), "Project_frauenloop2017"))
+	#conn = sqlite3.connect('/Users/ograndberry/Documents/FrauenLoop/SQL/databases/Project_frauenloop2017')
 	c = conn.cursor()
 
 #first graph
